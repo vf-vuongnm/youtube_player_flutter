@@ -34,6 +34,7 @@ class YoutubePlayerValue {
     this.webViewController,
     this.isDragging = false,
     this.metaData = const YoutubeMetaData(),
+    this.isLoadEndButNotReady = false,
   });
 
   /// Returns true when the player is ready to play videos.
@@ -86,6 +87,9 @@ class YoutubePlayerValue {
   /// Returns meta data of the currently loaded/cued video.
   final YoutubeMetaData metaData;
 
+  /// Returns true when the player is load end but not ready.
+  final bool isLoadEndButNotReady;
+
   /// Creates new [YoutubePlayerValue] with assigned parameters and overrides
   /// the old one.
   YoutubePlayerValue copyWith({
@@ -105,6 +109,7 @@ class YoutubePlayerValue {
     InAppWebViewController? webViewController,
     bool? isDragging,
     YoutubeMetaData? metaData,
+    bool? isLoadEndButNotReady,
   }) {
     return YoutubePlayerValue(
       isReady: isReady ?? this.isReady,
@@ -122,6 +127,7 @@ class YoutubePlayerValue {
       webViewController: webViewController ?? this.webViewController,
       isDragging: isDragging ?? this.isDragging,
       metaData: metaData ?? this.metaData,
+      isLoadEndButNotReady: isLoadEndButNotReady ?? this.isLoadEndButNotReady,
     );
   }
 
@@ -138,6 +144,7 @@ class YoutubePlayerValue {
         'playerState: $playerState, '
         'playbackRate: $playbackRate, '
         'playbackQuality: $playbackQuality, '
+        'isLoadEndButNotReady: $isLoadEndButNotReady, '
         'errorCode: $errorCode)';
   }
 }
@@ -310,6 +317,7 @@ class YoutubePlayerController extends ValueNotifier<YoutubePlayerValue> {
           isPlaying: false,
           isDragging: false,
           metaData: const YoutubeMetaData(),
+          isLoadEndButNotReady: false,
         ),
       );
 

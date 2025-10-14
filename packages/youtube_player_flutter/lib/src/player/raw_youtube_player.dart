@@ -222,6 +222,10 @@ class _RawYoutubePlayerState extends State<RawYoutubePlayer>
             controller!.updateValue(
               controller!.value.copyWith(isReady: true),
             );
+          } else {
+            controller!.updateValue(
+              controller!.value.copyWith(isLoadEndButNotReady: true),
+            );
           }
         },
       ),
